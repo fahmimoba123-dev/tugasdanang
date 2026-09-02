@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 Route::middleware('auth')->group(function () {
+    Route::resource('/dashboard', DashboardController::class)->except(['show']);
+
+
     Route::get('/', function () {
         return view('pages.home');
     })->name('home');

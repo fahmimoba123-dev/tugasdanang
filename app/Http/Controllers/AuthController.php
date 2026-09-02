@@ -18,7 +18,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('home')->with('success', 'Berhasil masuk. Selamat datang kembali!');
+            return redirect()->route('dashboard.index')->with('success', 'Berhasil masuk. Selamat datang kembali!');
         }
 
         return back()->withErrors([
@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home')->with('success', 'Akun berhasil dibuat. Selamat datang di Nusantara Heritage!');
+        return redirect()->route('dashboard.index')->with('success', 'Akun berhasil dibuat. Selamat datang di Nusantara Heritage!');
     }
 
     public function logout(Request $request)

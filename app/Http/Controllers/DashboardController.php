@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+class DashboardController extends Controller
+{
+    public function index()
+    {
+        $users = User::latest()->get();
+        return view('pages.dashboard.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('pages.dashboard.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('dashboard.index')->with('success', 'User berhasil ditambahkan.');
+    }
+
+    public function edit(User $dashboard)
+    {
+        // Note: The route parameter is {dashboard} because of Route::resource('dashboard')
+        // So we rename the variable here to $user for clarity
+        $user = $dashboard; 
+        return view('pages.dashboard.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $dashboard)
+    {
+        $user = $dashboard;
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8',
+        ]);
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('dashboard.index')->with('success', 'Data user berhasil diperbarui.');
+    }
+
+    public function destroy(User $dashboard)
+    {
+        $user = $dashboard;
+        
+        // Prevent deleting oneself
+        if (auth()->id() === $user->id) {
+            return redirect()->route('dashboard.index')->withErrors(['error' => 'Anda tidak bisa menghapus akun Anda sendiri.']);
+        }
+
+        $user->delete();
+        return redirect()->route('dashboard.index')->with('success', 'User berhasil dihapus.');
+    }
+}
