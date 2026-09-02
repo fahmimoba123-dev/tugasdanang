@@ -1,0 +1,193 @@
+/* Auth Layout - Split Screen */
+.auth-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+}
+
+.auth-banner {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(15, 17, 21, 0.85), rgba(15, 17, 21, 0.95)), url('../images/batik-bg.jpg') center/cover repeat;
+    background-size: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+    border-right: 1px solid var(--glass-border);
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 500px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.banner-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #d4af37, #f9e596);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+.banner-content p {
+    color: var(--text-main);
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.banner-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    color: var(--text-muted);
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.feature-item strong {
+    color: var(--text-main);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.auth-form-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    background-color: var(--bg-color);
+    position: relative;
+}
+
+.auth-form-wrapper .auth-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0;
+}
+
+.auth-form-wrapper .glass-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.auth-form-wrapper .glass-card:hover {
+    transform: none;
+    background: transparent;
+}
+
+.auth-form-wrapper .page-header {
+    text-align: left;
+    margin-bottom: 2.5rem;
+}
+
+.auth-form-wrapper .page-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-main);
+    background: none;
+    -webkit-text-fill-color: var(--text-main);
+}
+
+.auth-form-wrapper .page-header p {
+    font-size: 1.1rem;
+}
+
+.auth-form-wrapper .auth-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.auth-form-wrapper .form-group {
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.auth-form-wrapper .form-group label {
+    display: block;
+    width: 100%;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-main);
+    text-align: left;
+}
+
+.auth-form-wrapper .form-control {
+    width: 100% !important;
+    display: block !important;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.2rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.auth-form-wrapper .btn-block {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 1.2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+}
+
+.auth-form-wrapper .btn-block:hover {
+    background: var(--accent-hover);
+    color: #000;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.auth-form-wrapper .btn-block::before {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .auth-layout {
+        flex-direction: column;
+    }
+    
+    .auth-banner {
+        display: none;
+    }
+    
+    .auth-form-wrapper {
+        padding: 2rem;
+        min-height: 100vh;
+    }
+}
